@@ -99,7 +99,6 @@ namespace OpenVinoSharp
             ulong index,
             ref IntPtr input_port);
 
-
         /// <summary>
         /// Get a single const output port of ov_model_t, which only support single output model..
         /// </summary>
@@ -139,7 +138,6 @@ namespace OpenVinoSharp
             IntPtr model, 
             ref sbyte tensor_name, 
             ref IntPtr output_port);
-
 
         /// <summary>
         /// Get an single output port of ov_model_t, which only support single output model.
@@ -228,7 +226,6 @@ namespace OpenVinoSharp
             IntPtr[] tensor_names,
             ref Ov.ov_partial_shape partial_shapes,
             ulong size);
-
 
         /// <summary>
         /// Do reshape in model with partial shape for a specified name.

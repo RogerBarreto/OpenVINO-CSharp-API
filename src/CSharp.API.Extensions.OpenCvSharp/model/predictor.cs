@@ -54,7 +54,7 @@ namespace OpenVinoSharp.Extensions.model
                 {
                     throw new ArgumentNullException("input_size");
                 }
-                m_model.reshape(new PartialShape(new Shape(input_size)));
+                m_model.reshape(new PartialShape([.. input_size]));
             }
             m_compiled_model = m_core.compile_model(m_model, device);
             m_infer_request = m_compiled_model.create_infer_request();
@@ -70,7 +70,10 @@ namespace OpenVinoSharp.Extensions.model
         {
             Tensor input_tensor = m_infer_request.get_input_tensor();
             if (shape != null)
-                input_tensor.set_shape(new Shape(shape));
+            {
+                input_tensor.set_shape([.. shape]);
+            }
+
             input_tensor.set_data<float>(input_data);
             m_infer_request.infer();
 

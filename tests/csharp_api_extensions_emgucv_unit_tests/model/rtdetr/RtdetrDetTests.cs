@@ -56,13 +56,13 @@ namespace OpenVinoSharp.Extensions.model.Tests
         [TestMethod()]
         public void predict_test1()
         {
-            List<Mat> images = new List<Mat>()
-            {
+            List<Mat> images =
+            [
                  CvInvoke.Imread(image_path),
                  CvInvoke.Imread(image_path1),
                  CvInvoke.Imread(image_path2),
                   CvInvoke.Imread(image_path3)
-            };
+            ];
             RtdetrConfig config = new RtdetrConfig(model_path);
             config.batch_num = 4;
             RtdetrDet rtdetr = new RtdetrDet((RtdetrConfig)config);
@@ -80,13 +80,13 @@ namespace OpenVinoSharp.Extensions.model.Tests
         [TestMethod()]
         public void predict_test1_1()
         {
-            List<Mat> images = new List<Mat>()
-            {
+            List<Mat> images =
+            [
                 CvInvoke.Imread(image_path),
                  CvInvoke.Imread(image_path1),
                  CvInvoke.Imread(image_path2),
                   CvInvoke.Imread(image_path3)
-            };
+            ];
             RtdetrConfig config = new RtdetrConfig(model_path1);
             config.postprcoess = false;
             config.batch_num = 4;

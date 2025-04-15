@@ -34,7 +34,6 @@ namespace OpenVinoSharp.Extensions.result
         /// <param name="index">Identification result number.</param>
         /// <param name="lable">Identification result label.</param>
         /// <param name="score">Identification result score.</param>
-        /// <param name="box">Identification result box.</param>
         public ClsData(int index, string lable, float score)
         {
             this.index = index;
@@ -77,7 +76,10 @@ namespace OpenVinoSharp.Extensions.result
             string msg = "";
             msg += ("index: " + index.ToString() + "\t");
             if (lable != null)
+            {
                 msg += ("lable: " + lable.ToString() + "\t");
+            }
+
             msg += ("score: " + score.ToString(format) + "\t");
             return msg;
         }
@@ -89,7 +91,6 @@ namespace OpenVinoSharp.Extensions.result
         /// </summary>
         /// <param name="index">Identification result number.</param>
         /// <param name="score">Identification result score.</param>
-        /// <param name="box">Identification result box.</param>
         public override void add(int index, float score)
         {
             ClsData data = new ClsData(index, score);
@@ -101,7 +102,6 @@ namespace OpenVinoSharp.Extensions.result
         /// <param name="index">Identification result number.</param>
         /// <param name="lable">Identification result label.</param>
         /// <param name="score">Identification result score.</param>
-        /// <param name="box">Identification result box.</param>
         public override void add(int index, string lable, float score)
         {
             ClsData data = new ClsData(index, lable, score);

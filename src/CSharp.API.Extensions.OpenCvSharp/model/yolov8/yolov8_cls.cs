@@ -57,12 +57,12 @@ namespace OpenVinoSharp.Extensions.model
         }
         public List<ClsResult> predict(List<Mat> images)
         {
-            List<ClsResult> results = new List<ClsResult>();
+            List<ClsResult> results = [];
             for (int beg_img_no = 0; beg_img_no < images.Count; beg_img_no += m_batch_num)
             {
                 int end_img_no = Math.Min(images.Count, beg_img_no + m_batch_num);
                 int batch_num = end_img_no - beg_img_no;
-                List<Mat> norm_img_batch = new List<Mat>();
+                List<Mat> norm_img_batch = [];
                 float factors = 0f;
                 for (int ino = beg_img_no; ino < end_img_no; ino++)
                 {

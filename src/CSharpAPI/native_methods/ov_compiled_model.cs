@@ -82,7 +82,6 @@ namespace OpenVinoSharp
         public extern static ExceptionStatus ov_compiled_model_output(
             IntPtr compiled_model, ref IntPtr output_port);
 
-
         /// <summary>
         /// Get a const output port of ov_compiled_model_t by port index.
         /// </summary>
@@ -96,7 +95,6 @@ namespace OpenVinoSharp
             IntPtr compiled_model,
             ulong index,
             ref IntPtr output_port);
-
 
         /// <summary>
         /// Get a const output port of ov_compiled_model_t by name.

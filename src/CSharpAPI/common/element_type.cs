@@ -31,7 +31,6 @@ namespace OpenVinoSharp
         /// </summary>
         /// <param name="type">data type string</param>
         public OvType(string type) : base (type) { }
-
     };
     namespace element
     {

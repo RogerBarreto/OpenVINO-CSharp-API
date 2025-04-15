@@ -38,11 +38,15 @@ namespace OpenVinoSharp
             /// <summary>
             ///  devices' name
             /// </summary>
-            public IntPtr devices;
+            public IntPtr devices = default;
             /// <summary>
             /// devices' number
             /// </summary>
-            public ulong size;
+            public ulong size = 0;
+
+            public ov_available_devices_t()
+            {
+            }
         }
 
         /// <summary>
@@ -115,7 +119,6 @@ namespace OpenVinoSharp
             NativeMethods.ov_core_versions_free(ptr_core_version_s);
             return value;
         }
-
 
         /// <summary>
         /// Reads models from IR / ONNX / PDPD / TF / TFLite file formats.
@@ -207,7 +210,6 @@ namespace OpenVinoSharp
             return new Model(model_ptr);
         }
 
-
         /// <summary>
         /// Creates a compiled model from a source model object.
         /// </summary>
@@ -253,7 +255,7 @@ namespace OpenVinoSharp
             }
             else if (properties.Count==1) 
             {
-                List<IntPtr> inputs = new List<IntPtr>();
+                List<IntPtr> inputs = [];
                 foreach (var item in properties)
                 {
                     inputs.Add(Marshal.StringToHGlobalAnsi(item.Key));
@@ -265,7 +267,7 @@ namespace OpenVinoSharp
             }
             else if (properties.Count == 2)
             {
-                List<IntPtr> inputs = new List<IntPtr>();
+                List<IntPtr> inputs = [];
                 foreach (var item in properties)
                 {
                     inputs.Add(Marshal.StringToHGlobalAnsi(item.Key));
@@ -277,7 +279,7 @@ namespace OpenVinoSharp
             }
             else if (properties.Count == 3)
             {
-                List<IntPtr> inputs = new List<IntPtr>();
+                List<IntPtr> inputs = [];
                 foreach (var item in properties)
                 {
                     inputs.Add(Marshal.StringToHGlobalAnsi(item.Key));
@@ -339,7 +341,7 @@ namespace OpenVinoSharp
             }
             else if (properties.Count == 1)
             {
-                List<IntPtr> inputs = new List<IntPtr>();
+                List<IntPtr> inputs = [];
                 foreach (var item in properties)
                 {
                     inputs.Add(Marshal.StringToHGlobalAnsi(item.Key));
@@ -351,7 +353,7 @@ namespace OpenVinoSharp
             }
             else if (properties.Count == 2)
             {
-                List<IntPtr> inputs = new List<IntPtr>();
+                List<IntPtr> inputs = [];
                 foreach (var item in properties)
                 {
                     inputs.Add(Marshal.StringToHGlobalAnsi(item.Key));
@@ -363,7 +365,7 @@ namespace OpenVinoSharp
             }
             else if (properties.Count == 3)
             {
-                List<IntPtr> inputs = new List<IntPtr>();
+                List<IntPtr> inputs = [];
                 foreach (var item in properties)
                 {
                     inputs.Add(Marshal.StringToHGlobalAnsi(item.Key));
@@ -401,7 +403,7 @@ namespace OpenVinoSharp
 
             if (properties.Count == 1)
             {
-                List<IntPtr> inputs = new List<IntPtr>();
+                List<IntPtr> inputs = [];
                 foreach (var item in properties)
                 {
                     inputs.Add(Marshal.StringToHGlobalAnsi(item.Key));
@@ -412,7 +414,7 @@ namespace OpenVinoSharp
             }
             else if (properties.Count == 2)
             {
-                List<IntPtr> inputs = new List<IntPtr>();
+                List<IntPtr> inputs = [];
                 foreach (var item in properties)
                 {
                     inputs.Add(Marshal.StringToHGlobalAnsi(item.Key));
@@ -423,7 +425,7 @@ namespace OpenVinoSharp
             }
             else if (properties.Count == 3)
             {
-                List<IntPtr> inputs = new List<IntPtr>();
+                List<IntPtr> inputs = [];
                 foreach (var item in properties)
                 {
                     inputs.Add(Marshal.StringToHGlobalAnsi(item.Key));
@@ -437,7 +439,6 @@ namespace OpenVinoSharp
             {
                 throw new Exception("Only supports parameter quantities of 1, 2, and 3.");
             }
-
         }
 
         /// <summary>
@@ -496,7 +497,7 @@ namespace OpenVinoSharp
             ov_available_devices_t devices_s = (ov_available_devices_t)temp1;
             IntPtr[] devices_ptrs = new IntPtr[devices_s.size];
             Marshal.Copy(devices_s.devices, devices_ptrs, 0, (int)devices_s.size);
-            List<string> devices = new List<string>();
+            List<string> devices = [];
             for (int i = 0; i < (int)devices_s.size; ++i)
             {
                 devices.Add(Marshal.PtrToStringAnsi(devices_ptrs[i]));

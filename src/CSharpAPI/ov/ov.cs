@@ -25,8 +25,10 @@ namespace OpenVinoSharp
             }
             var temp = Marshal.PtrToStructure(ptr, typeof(Version));
             Version version = (Version)temp;
+#pragma warning disable CS0618 // Type or member is obsolete
             string build = string.Copy(version.buildNumber);
             string description = string.Copy(version.description);
+#pragma warning restore CS0618 // Type or member is obsolete
             Version new_version = new Version(build, description);
             NativeMethods.ov_version_free(ptr);
             return new_version;
@@ -37,7 +39,6 @@ namespace OpenVinoSharp
             FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read);
 
             long len = fs.Seek(0, SeekOrigin.End);
-
 
             fs.Seek(0, SeekOrigin.Begin);
 

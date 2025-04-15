@@ -66,6 +66,7 @@ namespace OpenVinoSharp.preprocess
         /// (e.g. {param1, param2} will become {param1/Y, param1/UV, param2})
         /// </remarks>
         /// <param name="format">Color format of input image.</param>
+        /// <param name="properties"></param>
         /// <returns>Reference to 'this' to allow chaining with other calls in a builder-like manner.</returns>
         public InputTensorInfo set_color_format(ColorFormat format, params string[] properties)
         {
@@ -150,10 +151,9 @@ namespace OpenVinoSharp.preprocess
             return this;
         }
 
-
         /// <summary>
         /// Helper function to reuse element type and shape from user's created tensor. Use this only in case if
-        /// input tensor is already known and available before. Overwrites previously set element type & shape via
+        /// input tensor is already known and available before. Overwrites previously set element type &amp; shape via
         /// `set_element_type` and `set_shape`. Tensor's memory type is not reused, so if `runtime_tensor` represents remote
         /// tensor with particular memory type - you should still specify appropriate memory type manually using
         /// `set_memory_type`

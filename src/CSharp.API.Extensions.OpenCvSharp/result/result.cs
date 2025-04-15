@@ -50,7 +50,7 @@ namespace OpenVinoSharp.Extensions.result
         /// </summary>
         public Result()
         {
-            datas = new List<T>();
+            datas = [];
         }
         /// <summary>
         /// Constructor.
@@ -66,7 +66,7 @@ namespace OpenVinoSharp.Extensions.result
         /// <param name="values"></param>
         public Result(Result<T> values)
         {
-            datas = new List<T>(values.datas);
+            datas = [.. values.datas];
         }
 
         /// <summary>
@@ -159,7 +159,6 @@ namespace OpenVinoSharp.Extensions.result
         public void copy_to(int index, T[] array, int array_index, int count)
             => datas.CopyTo(index, array, array_index, count);
 
-
         /// <summary>
         /// Searches for an element that matches the conditions defined by the specified 
         /// predicate, and returns the first occurrence within the entire inference results.
@@ -219,7 +218,6 @@ namespace OpenVinoSharp.Extensions.result
         /// defined by match, if found; otherwise, -1.
         /// </returns>
         public int find_index(Predicate<T> match) => datas.FindIndex(match);
-
 
         /// <summary>
         /// Searches for an element that matches the conditions defined by the specified

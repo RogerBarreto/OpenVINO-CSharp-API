@@ -182,7 +182,7 @@ namespace OpenVinoSharp
         /// The input contains information about input tensor such as tensor shape, names, and element type.
         /// </remarks>
         /// <returns>Compiled model input.</returns>
-        /// <exception cref="">If a model has more than one input, this method throws ov::Exception.</exception>
+        /// <exception cref="Exception">If a model has more than one input, this method throws ov::Exception.</exception>
         public Input input()
         {
             Node node = get_input();
@@ -194,7 +194,7 @@ namespace OpenVinoSharp
         /// <remarks>The input contains information about input tensor such as tensor shape, names, and element type.</remarks>
         /// <param name="index">Index of input.</param>
         /// <returns>Compiled model input.</returns>
-        /// <exception cref="">The method throws ov::Exception if input with the specified index @p i is not found.</exception>
+        /// <exception cref="Exception">The method throws ov::Exception if input with the specified index @p i is not found.</exception>
         public Input input(ulong index)
         {
             Node node = get_input(index);
@@ -206,7 +206,7 @@ namespace OpenVinoSharp
         /// <remarks>The input contains information about input tensor such as tensor shape, names, and element type.</remarks>
         /// <param name="tensor_name">Output tensor name.</param>
         /// <returns>Compiled model input.</returns>
-        /// <exception cref="">The method throws ov::Exception if input with the specified tensor name @p tensor_name is not found.</exception>
+        /// <exception cref="Exception">The method throws ov::Exception if input with the specified tensor name @p tensor_name is not found.</exception>
         public Input input(string tensor_name)
         {
             Node node = get_input(tensor_name);
@@ -221,7 +221,7 @@ namespace OpenVinoSharp
         /// The output contains information about output tensor such as tensor shape, names, and element type.
         /// </remarks>
         /// <returns>Compiled model output.</returns>
-        /// <exception cref="">If a model has more than one output, this method throws ov::Exception.</exception>
+        /// <exception cref="Exception">If a model has more than one output, this method throws ov::Exception.</exception>
         public Output output()
         {
             Node node = get_output();
@@ -233,7 +233,7 @@ namespace OpenVinoSharp
         /// <remarks> The output contains information about output tensor such as tensor shape, names, and element type.</remarks>
         /// <param name="index">Index of output.</param>
         /// <returns>Compiled model output.</returns>
-        /// <exception cref="">The method throws ov::Exception if output with the specified index @p index is not found.</exception>
+        /// <exception cref="Exception">The method throws ov::Exception if output with the specified index @p index is not found.</exception>
         public Output output(ulong index)
         {
             Node node = get_output(index);
@@ -245,7 +245,7 @@ namespace OpenVinoSharp
         /// <remarks>The output contains information about output tensor such as tensor shape, names, and element type.</remarks>
         /// <param name="tensor_name">Output tensor name.</param>
         /// <returns>Compiled model output.</returns>
-        /// <exception cref="">The method throws ov::Exception if output with the specified tensor name @p tensor_name is not found.</exception>
+        /// <exception cref="Exception">The method throws ov::Exception if output with the specified tensor name @p tensor_name is not found.</exception>
         public Output output(string tensor_name)
         {
             Node node = get_output(tensor_name);
@@ -263,7 +263,7 @@ namespace OpenVinoSharp
         public List<Input> inputs()
         {
             ulong input_size = get_inputs_size();
-            List<Input> inputs = new List<Input>();
+            List<Input> inputs = [];
             for (ulong index = 0; index < input_size; ++index)
             {
                 inputs.Add(input(index));
@@ -282,7 +282,7 @@ namespace OpenVinoSharp
         public List<Output> outputs()
         {
             ulong output_size = get_outputs_size();
-            List<Output> outputs = new List<Output>();
+            List<Output> outputs = [];
             for (ulong index = 0; index < output_size; ++index)
             {
                 outputs.Add(output(index));

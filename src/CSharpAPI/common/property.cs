@@ -15,11 +15,11 @@ namespace OpenVinoSharp
     {
         // Read-only property key
         /// <summary>
-        /// Read-only property<string> to get a string list of supported read-only properties.
+        /// Read-only property(string) to get a string list of supported read-only properties.
         /// </summary>
         SUPPORTED_PROPERTIES,
         /// <summary>
-        /// Read-only property<string> to get a list of available device IDs.
+        /// Read-only property(string) to get a list of available device IDs.
         /// </summary>
         AVAILABLE_DEVICES,
         /// <summary>
@@ -28,7 +28,7 @@ namespace OpenVinoSharp
         /// </summary>
         OPTIMAL_NUMBER_OF_INFER_REQUESTS,
         /// <summary>
-        /// Read-only property<string(unsigned int, unsigned int, unsigned int) to provide a
+        /// Read-only property(string(unsigned int, unsigned int, unsigned int)) to provide a
         /// hint for a range for number of async infer requests. If device supports
         /// streams, the metric provides range for number of IRs per stream.
         /// </summary>
@@ -39,15 +39,15 @@ namespace OpenVinoSharp
         /// </summary>
         RANGE_FOR_STREAMS,
         /// <summary>
-        /// Read-only property<string> to get a string value representing a full device name.
+        /// Read-only property(string) to get a string value representing a full device name.
         /// </summary>
         FULL_DEVICE_NAME,
         /// <summary>
-        /// Read-only property<string> to get a string list of capabilities options per device.
+        /// Read-only property(string) to get a string list of capabilities options per device.
         /// </summary>
         OPTIMIZATION_CAPABILITIES,
         /// <summary>
-        /// Read-only property<string> to get a name of name of a model
+        /// Read-only property(string) to get a name of name of a model
         /// </summary>
         NETWORK_NAME,
         /// <summary>
@@ -68,7 +68,7 @@ namespace OpenVinoSharp
         /// </summary>
         CACHE_DIR,
         /// <summary>
-        /// Read-write property<string> to select the cache mode between optimize_size and optimize_speed. 
+        /// Read-write property(string) to select the cache mode between optimize_size and optimize_speed. 
         /// If optimize_size is selected, smaller cache files will be created. 
         /// And if optimize_speed is selected, loading time will decrease but the cache file size will increase. 
         /// </summary>
@@ -104,7 +104,7 @@ namespace OpenVinoSharp
         /// </summary>
         ENABLE_HYPER_THREADING,
         /// <summary>
-        /// Read-write property<ov_element_type_e> to set the hint for device to use specified precision for inference.
+        /// Read-write property(ov_element_type_e> to set the hint for device to use specified precision for inference.
         /// </summary>
         INFERENCE_PRECISION_HINT,
         /// <summary>
@@ -119,7 +119,7 @@ namespace OpenVinoSharp
         /// </summary>
         MODEL_PRIORITY,
         /// <summary>
-        /// Read-write property<string> for setting desirable log level.
+        /// Read-write property(string) for setting desirable log level.
         /// </summary>
         LOG_LEVEL,
         /// <summary>

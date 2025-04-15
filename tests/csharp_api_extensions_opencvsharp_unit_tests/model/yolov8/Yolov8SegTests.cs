@@ -37,10 +37,7 @@ namespace OpenVinoSharp.Extensions.model.Tests
         {
             Config config = new Yolov8SegConfig(model_xml_path);
             Yolov8Seg yolo = new Yolov8Seg((Yolov8SegConfig)config);
-            List<Mat> images = new List<Mat>();
-            images.Add(Cv2.ImRead(image_path));
-            images.Add(Cv2.ImRead(image_path1));
-            images.Add(Cv2.ImRead(image_path2));
+            List<Mat> images = [Cv2.ImRead(image_path), Cv2.ImRead(image_path1), Cv2.ImRead(image_path2)];
             List<SegResult> results = yolo.predict(images);
             Assert.IsNotNull(results);
         }

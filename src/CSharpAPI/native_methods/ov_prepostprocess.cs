@@ -112,7 +112,6 @@ namespace OpenVinoSharp
             IntPtr preprocess_input_info,
             ref IntPtr preprocess_input_steps);
 
-
         /// <summary>
         /// Release the memory allocated by ov_preprocess_preprocess_steps_t.
         /// </summary>
@@ -121,7 +120,6 @@ namespace OpenVinoSharp
             CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public extern static void ov_preprocess_preprocess_steps_free(
             IntPtr preprocess_input_process_steps);
-
 
         /// <summary>
         /// Add resize operation to model's dimensions.
@@ -135,7 +133,6 @@ namespace OpenVinoSharp
             IntPtr preprocess_input_process_steps,
             int resize_algorithm);
 
-
         /// <summary>
         /// Add scale preprocess operation. Divide each element of input by specified value.
         /// </summary>
@@ -147,7 +144,6 @@ namespace OpenVinoSharp
         public extern static ExceptionStatus ov_preprocess_preprocess_steps_scale(
             IntPtr preprocess_input_process_steps, 
             float value);
-
 
         /// <summary>
         /// Add scale preprocess operation. Divide each channel element of input by different specified value.
@@ -222,7 +218,6 @@ namespace OpenVinoSharp
             IntPtr preprocess_input_process_steps,
             IntPtr layout);
 
-
         /// <summary>
         /// Reverse channels operation.
         /// </summary>
@@ -257,13 +252,13 @@ namespace OpenVinoSharp
             IntPtr preprocess_input_tensor_info,
             uint color_format);
 
-
         /// <summary>
         /// Set ov_preprocess_input_tensor_info_t color format with subname.
         /// </summary>
         /// <param name="preprocess_input_tensor_info">A pointer to the ov_preprocess_input_tensor_info_t.</param>
         /// <param name="color_format">The enumerate of colorFormat</param>
         /// <param name="sub_names_size">The size of sub_names.</param>
+        /// <param name="k1"></param>
         /// <returns>Status code of the operation: OK(0) for success.</returns>
         [DllImport(dll_extern, EntryPoint = "ov_preprocess_input_tensor_info_set_color_format_with_subname",
             CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
@@ -308,7 +303,6 @@ namespace OpenVinoSharp
             ulong input_height,
             ulong input_width);
 
-
         /// <summary>
         /// Set ov_preprocess_input_tensor_info_t memory type.
         /// </summary>
@@ -320,7 +314,6 @@ namespace OpenVinoSharp
         public extern static ExceptionStatus ov_preprocess_input_tensor_info_set_memory_type(
             IntPtr preprocess_input_tensor_info,
             ref sbyte mem_type);
-
 
         /// <summary>
         /// Convert ov_preprocess_preprocess_steps_t element type.
@@ -334,7 +327,6 @@ namespace OpenVinoSharp
             IntPtr preprocess_input_process_steps,
             uint element_type);
 
-
         /// <summary>
         /// onvert ov_preprocess_preprocess_steps_t color.
         /// </summary>
@@ -346,7 +338,6 @@ namespace OpenVinoSharp
         public extern static ExceptionStatus ov_preprocess_preprocess_steps_convert_color(
             IntPtr preprocess_input_process_steps,
            uint color_format);
-
 
         /// <summary>
         /// Helper function to reuse element type and shape from user's created tensor.
@@ -372,7 +363,6 @@ namespace OpenVinoSharp
             IntPtr preprocess_input_tensor_info,
             IntPtr layout);
 
-
         /// <summary>
         /// Get the output info of ov_preprocess_output_info_t instance.
         /// </summary>
@@ -384,7 +374,6 @@ namespace OpenVinoSharp
         public extern static ExceptionStatus ov_preprocess_prepostprocessor_get_output_info(
             IntPtr preprocess,
             ref IntPtr preprocess_output_info);
-
 
         /// <summary>
         /// Get the output info of ov_preprocess_output_info_t instance.
@@ -400,7 +389,6 @@ namespace OpenVinoSharp
             ulong tensor_index,
             ref IntPtr preprocess_output_info);
 
-
         /// <summary>
         /// Get the output info of ov_preprocess_output_info_t instance.
         /// </summary>
@@ -415,7 +403,6 @@ namespace OpenVinoSharp
             ref sbyte tensor_name,
             ref IntPtr preprocess_output_info);
 
-
         /// <summary>
         /// Release the memory allocated by ov_preprocess_output_info_t.
         /// </summary>
@@ -423,7 +410,6 @@ namespace OpenVinoSharp
         [DllImport(dll_extern, EntryPoint = "ov_preprocess_output_info_free", 
             CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public extern static void ov_preprocess_output_info_free(IntPtr preprocess_output_info);
-
 
         /// <summary>
         /// Get a ov_preprocess_input_tensor_info_t.
@@ -446,7 +432,6 @@ namespace OpenVinoSharp
         public extern static void ov_preprocess_output_tensor_info_free(
             IntPtr preprocess_output_tensor_info);
 
-
         /// <summary>
         /// Set ov_preprocess_input_tensor_info_t precesion.
         /// </summary>
@@ -458,7 +443,6 @@ namespace OpenVinoSharp
         public extern static ExceptionStatus ov_preprocess_output_set_element_type(
             IntPtr preprocess_output_tensor_info,
             uint element_type);
-
 
         /// <summary>
         /// Get current input model information.
@@ -493,7 +477,6 @@ namespace OpenVinoSharp
         public extern static ExceptionStatus ov_preprocess_input_model_info_set_layout(
             IntPtr preprocess_input_model_info,
             IntPtr layout);
-
 
         /// <summary>
         /// Adds pre/post-processing operations to function passed in constructor.

@@ -128,7 +128,7 @@ namespace OpenVinoSharp
             Marshal.Copy(shape.dims, data, 0, (int)rank.get_max() * 2);
             for (int i = 0; i < rank.get_max(); ++i)
             {
-                dimensions[i] = new Dimension(data[2 * i], data[2 * i + 1]);
+                dimensions[i] = new Dimension(data[2 * i], data[(2 * i) + 1]);
             }
         }
         /// <summary>
@@ -139,7 +139,7 @@ namespace OpenVinoSharp
         {
             Ov.ov_partial_shape shape_arr = new Ov.ov_partial_shape();
             shape_arr.rank = rank.get_dimension();
-            List<Ov.ov_dimension> ov_dims = new List<Ov.ov_dimension>();
+            List<Ov.ov_dimension> ov_dims = [];
             for (int i = 0; i < shape_arr.rank.max; ++i)
             {
                 ov_dims.Add(dimensions[i].get_dimension());

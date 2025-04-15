@@ -67,7 +67,6 @@ namespace OpenVinoSharp.preprocess
             return this;
         }
 
-
         /// <summary>
         /// Add scale preprocess operation. Divide each element of input by specified value.
         /// </summary>

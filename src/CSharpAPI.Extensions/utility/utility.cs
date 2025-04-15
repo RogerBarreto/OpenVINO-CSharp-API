@@ -18,7 +18,7 @@ namespace OpenVinoSharp.Extensions.utility
             int array_len = array.Count;
 
             //生成值和索引的列表
-            List<float[]> new_array = new List<float[]> { };
+            List<float[]> new_array = [];
             for (int i = 0; i < array_len; i++)
             {
                 new_array.Add(new float[] { array[i], i });
@@ -26,7 +26,7 @@ namespace OpenVinoSharp.Extensions.utility
             //对列表按照值大到小进行排序
             new_array.Sort((a, b) => b[0].CompareTo(a[0]));
             //获取排序后的原索引
-            List<int> array_index = new List<int>();
+            List<int> array_index = [];
             foreach (float[] item in new_array)
             {
                 array_index.Add((int)item[1]);

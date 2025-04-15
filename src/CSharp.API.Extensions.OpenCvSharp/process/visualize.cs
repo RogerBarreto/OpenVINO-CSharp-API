@@ -87,6 +87,8 @@ namespace OpenVinoSharp.Extensions.process
         /// </summary>
         /// <param name="bresult">Key point data</param>
         /// <param name="img">image</param>
+        /// <param name="visual_thresh"></param>
+        /// <param name="with_box"></param>
         public static Mat draw_poses(BaseResult bresult, Mat img, float visual_thresh = 0.2f, bool with_box = true)
         {
             PoseResult pose = bresult as PoseResult;
@@ -148,6 +150,5 @@ namespace OpenVinoSharp.Extensions.process
             return image;
 
         }
-
     }
 }

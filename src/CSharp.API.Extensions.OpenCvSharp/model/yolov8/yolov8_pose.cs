@@ -27,9 +27,9 @@ namespace OpenVinoSharp.Extensions.model
             m_det_thresh = det_thresh ?? Yolov8DetOption.det_thresh;
             m_det_nms_thresh = det_nms_thresh ?? Yolov8DetOption.det_nms_thresh;
             m_input_size = input_size ?? Yolov8DetOption.input_size;
-            m_output_length = (int)m_input_size[2] / 8 * (int)m_input_size[2] / 8 +
-                 (int)m_input_size[2] / 16 * (int)m_input_size[2] / 16 +
-                 (int)m_input_size[2] / 32 * (int)m_input_size[2] / 32;
+            m_output_length = ((int)m_input_size[2] / 8 * (int)m_input_size[2] / 8) +
+                 ((int)m_input_size[2] / 16 * (int)m_input_size[2] / 16) +
+                 ((int)m_input_size[2] / 32 * (int)m_input_size[2] / 32);
             m_batch_num = batch_num ?? Yolov8DetOption.batch_num;
         }
 
@@ -39,9 +39,9 @@ namespace OpenVinoSharp.Extensions.model
             m_det_thresh = config.det_thresh;
             m_det_nms_thresh = config.det_nms_thresh;
             m_input_size = config.input_size ?? Yolov8DetOption.input_size;
-            m_output_length = (int)m_input_size[2] / 8 * (int)m_input_size[2] / 8 +
-                 (int)m_input_size[2] / 16 * (int)m_input_size[2] / 16 +
-                 (int)m_input_size[2] / 32 * (int)m_input_size[2] / 32;
+            m_output_length = ((int)m_input_size[2] / 8 * (int)m_input_size[2] / 8) +
+                 ((int)m_input_size[2] / 16 * (int)m_input_size[2] / 16) +
+                 ((int)m_input_size[2] / 32 * (int)m_input_size[2] / 32);
             m_batch_num = config.batch_num;
         }
         public PoseResult predict(Mat image)
@@ -57,12 +57,12 @@ namespace OpenVinoSharp.Extensions.model
         }
         public List<PoseResult> predict(List<Mat> images)
         {
-            List<PoseResult> re_results = new List<PoseResult>();
+            List<PoseResult> re_results = [];
             for (int beg_img_no = 0; beg_img_no < images.Count; beg_img_no += m_batch_num)
             {
                 int end_img_no = Math.Min(images.Count, beg_img_no + m_batch_num);
                 int batch_num = end_img_no - beg_img_no;
-                List<Mat> norm_img_batch = new List<Mat>();
+                List<Mat> norm_img_batch = [];
                 m_factors = new float[batch_num];
                 for (int ino = beg_img_no; ino < end_img_no; ino++)
                 {
@@ -85,18 +85,19 @@ namespace OpenVinoSharp.Extensions.model
         /// Result process
         /// </summary>
         /// <param name="result">Model prediction output</param>
+        /// <param name="batch"></param>
         /// <returns>Model recognition results</returns>
         public List<PoseResult> process_result(float[] result, int batch)
         {
-            List<PoseResult> re_result = new List<PoseResult>();
+            List<PoseResult> re_result = [];
             for (int b = 0; b < batch; ++b)
             {
                 Mat result_data = new Mat(56, m_output_length, MatType.CV_32FC1,
                     Marshal.UnsafeAddrOfPinnedArrayElement(result, 56 * m_output_length * b * 4));
                 result_data = result_data.T();
-                List<Rect> position_boxes = new List<Rect>();
-                List<float> confidences = new List<float>();
-                List<PosePoint> pose_datas = new List<PosePoint>();
+                List<Rect> position_boxes = [];
+                List<float> confidences = [];
+                List<PosePoint> pose_datas = [];
                 for (int i = 0; i < result_data.Rows; i++)
                 {
                     if (result_data.At<float>(i, 4) > 0.25)
@@ -106,8 +107,8 @@ namespace OpenVinoSharp.Extensions.model
                         float cy = result_data.At<float>(i, 1);
                         float ow = result_data.At<float>(i, 2);
                         float oh = result_data.At<float>(i, 3);
-                        int x = (int)((cx - 0.5 * ow) * this.m_factors[b]);
-                        int y = (int)((cy - 0.5 * oh) * this.m_factors[b]);
+                        int x = (int)((cx - (0.5 * ow)) * this.m_factors[b]);
+                        int y = (int)((cy - (0.5 * oh)) * this.m_factors[b]);
                         int width = (int)(ow * this.m_factors[b]);
                         int height = (int)(oh * this.m_factors[b]);
                         Rect box = new Rect();

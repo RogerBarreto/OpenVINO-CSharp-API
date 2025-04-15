@@ -22,7 +22,6 @@ namespace OpenVinoSharp.Extensions.utility
             HttpClient client = new HttpClient();
             Stopwatch stopwatch = Stopwatch.StartNew();
 
-
             await Console.Out.WriteLineAsync(
             $"<{TimeSpan.FromMilliseconds(stopwatch.ElapsedMilliseconds).ToString(@"hh\:mm\:ss")}> Sending http request to {url}.");
 
@@ -49,7 +48,6 @@ namespace OpenVinoSharp.Extensions.utility
                 }
                 await Console.Out.WriteLineAsync();
             }
-
 
             await Console.Out.WriteLineAsync(
                 $"<{TimeSpan.FromMilliseconds(stopwatch.ElapsedMilliseconds).ToString(@"hh\:mm\:ss")}> Download Started.");
@@ -133,7 +131,6 @@ namespace OpenVinoSharp.Extensions.utility
             }
             else { throw new NotSupportedException("Decompression of this format file is currently not supported."); }
         }
-
     }
 
     public class DownloadConsole
@@ -159,17 +156,26 @@ namespace OpenVinoSharp.Extensions.utility
             int percent = (int)(((float)down_len / (float)total_len) * 100);
             float down = down_len / (1024.0f * 1024.0f);
             if (update)
+            {
                 Console.Write(_back);
+            }
+
             Console.Write("<{0}> Downloading: [", TimeSpan.FromMilliseconds(time).ToString(@"hh\:mm\:ss"));
             var p = (int)((percent / 10f) + .5f);
             for (var i = 0; i < 10; ++i)
             {
                 if (i > p)
+                {
                     Console.Write("  ");
+                }
                 else if (i == p)
+                {
                     Console.Write(_twirl[percent % _twirl.Length]);
+                }
                 else
+                {
                     Console.Write(_block);
+                }
             }
             Console.Write("] {0,3:##0}%", percent);
 

@@ -43,10 +43,7 @@ namespace OpenVinoSharp.Extensions.model.Tests
         {
             Yolov5DetConfig config = new Yolov5DetConfig(model_xml_path);
             Yolov5Det yolo = new Yolov5Det(config);
-            List<Mat> images = new List<Mat>();
-            images.Add(CvInvoke.Imread(image_path));
-            images.Add(CvInvoke.Imread(image_path1));
-            images.Add(CvInvoke.Imread(image_path2));
+            List<Mat> images = [CvInvoke.Imread(image_path), CvInvoke.Imread(image_path1), CvInvoke.Imread(image_path2)];
             List<DetResult> results = yolo.predict(images);
             Mat im = Visualize.draw_det_result(results[0], images[0]);
             CvInvoke.Imshow("ww", im);

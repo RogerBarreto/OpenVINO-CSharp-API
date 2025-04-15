@@ -12,7 +12,6 @@ namespace OpenVinoSharp.Tests
     public class CoreTests : OVBaseTest
     {
 
-
         [TestMethod()]
         public void Core_test()
         {
@@ -54,7 +53,7 @@ namespace OpenVinoSharp.Tests
         {
             byte[] data = content_from_file(get_model_bin_file_name());
 
-            Shape shape = new Shape(new List<long> { 1, data.Length });
+            Shape shape = [.. new List<long> { 1, data.Length }];
             Tensor tensor = new Tensor(new element.Type(element.Type_t.u8), shape, data);
 
             Core core = new Core();
@@ -63,13 +62,12 @@ namespace OpenVinoSharp.Tests
             Assert.IsTrue(model.Ptr != IntPtr.Zero);
         }
 
-
         [TestMethod()]
         public void read_model_test2()
         {
             byte[] data = content_from_file(get_model_bin_file_name());
 
-            Shape shape = new Shape(new List<long> { 1, data.Length });
+            Shape shape = [.. new List<long> { 1, data.Length }];
             Tensor tensor = new Tensor(new element.Type(element.Type_t.u8), shape, data);
 
             FileStream fs = new FileStream(get_model_xml_file_name(), FileMode.Open, FileAccess.Read);
@@ -104,8 +102,10 @@ namespace OpenVinoSharp.Tests
             Model model = core.read_model(get_model_xml_file_name());
             Assert.IsTrue(model.Ptr != IntPtr.Zero);
 
-            Dictionary<string, string> latency = new Dictionary<string, string>();
-            latency.Add("NUM_STREAMS", "2");
+            Dictionary<string, string> latency = new Dictionary<string, string>
+            {
+                { "NUM_STREAMS", "2" }
+            };
 
             CompiledModel compiled = core.compile_model(model, get_device(), latency);
             Assert.IsTrue(compiled.Ptr != IntPtr.Zero);
@@ -121,8 +121,10 @@ namespace OpenVinoSharp.Tests
         public void compile_model_test2()
         {
             var core = new Core();
-            Dictionary<string, string> latency = new Dictionary<string, string>();
-            latency.Add("PERFORMANCE_HINT", "1");
+            Dictionary<string, string> latency = new Dictionary<string, string>
+            {
+                { "PERFORMANCE_HINT", "1" }
+            };
             CompiledModel compiled = core.compile_model(get_model_xml_file_name(), latency);
             Assert.IsTrue(compiled.Ptr != IntPtr.Zero);
             latency.Add("PERFORMANCE", "1");
@@ -136,8 +138,10 @@ namespace OpenVinoSharp.Tests
         public void compile_model_test3()
         {
             var core = new Core();
-            Dictionary<string, string> latency = new Dictionary<string, string>();
-            latency.Add("PERFORMANCE_HINT", "1");
+            Dictionary<string, string> latency = new Dictionary<string, string>
+            {
+                { "PERFORMANCE_HINT", "1" }
+            };
             CompiledModel compiled = core.compile_model(get_model_xml_file_name(), get_device(), latency);
             Assert.IsTrue(compiled.Ptr != IntPtr.Zero);
             latency.Add("PERFORMANCE", "1");
@@ -226,8 +230,6 @@ namespace OpenVinoSharp.Tests
             core.Dispose();
         }
 
-
-
         [TestMethod()]
         public void get_propertyTest()
         {
@@ -241,8 +243,10 @@ namespace OpenVinoSharp.Tests
         public void set_propertyTest1()
         {
             var core = new Core();
-            Dictionary<string, string> dict = new Dictionary<string, string>();
-            dict.Add(Ov.cache_dir("./model").Key, Ov.cache_dir("./model").Value);
+            Dictionary<string, string> dict = new Dictionary<string, string>
+            {
+                { Ov.cache_dir("./model").Key, Ov.cache_dir("./model").Value }
+            };
             core.set_property(get_device(), dict);
             string s = core.get_property(get_device(), PropertyKey.CACHE_DIR);
             Assert.IsNotNull(s);
@@ -252,7 +256,5 @@ namespace OpenVinoSharp.Tests
         public void import_modelTest()
         {
         }
-
-
     }
 }

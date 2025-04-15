@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace OpenVinoSharp.Extensions.model
 {
     public struct CocoOption
     {
-        public static List<string> lables = new List<string>{
+        public static List<string> lables = [
             "person", "bicycle", "car", "motorbike", "aeroplane", "bus", "train", "truck",
             "boat", "traffic light","fire hydrant","stop sign", "parking meter", "bench", "bird", "cat", "dog",
             "horse", "sheep", "cow", "elephant", "bear", "zebra", "giraffe","backpack", "umbrella","handbag",
@@ -18,12 +17,12 @@ namespace OpenVinoSharp.Extensions.model
             "knife", "spoon", "bowl", "banana", "apple", "sandwich", "orange","broccoli", "carrot","hot dog",
             "pizza", "donut", "cake", "chair", "sofa", "pottedplant", "bed", "diningtable", "toilet",
             "tvmonitor", "laptop", "mouse","remote","keyboard", "cell phone", "microwave", "oven", "toaster",
-            "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear", "hair drier", "toothbrush"};
+            "sink", "refrigerator", "book", "clock", "vase", "scissors", "teddy bear", "hair drier", "toothbrush"];
     }
 
     public struct ImageNetOption
     {
-        public static List<string> lables = new List<string> {
+        public static List<string> lables = [
             "tench","goldfish","great_white_shark","tiger_shark","hammerhead","electric_ray","stingray","cock",
             "hen","ostrich","brambling","goldfinch","house_finch","junco","indigo_bunting","robin","bulbul","jay",
             "magpie","chickadee","water_ouzel","kite","bald_eagle","vulture","great_grey_owl","European_fire_salamander",
@@ -144,6 +143,6 @@ namespace OpenVinoSharp.Extensions.model
             "alp","bubble","cliff","coral_reef","geyser","lakeside","promontory","sandbar","seashore","valley",
             "volcano","ballplayer","groom","scuba_diver","rapeseed","daisy","yellow_ladys_slipper","corn","acorn",
             "hip","buckeye","coral_fungus","agaric","gyromitra","stinkhorn","earthstar","hen-of-the-woods","bolete",
-            "ear","toilet_tissue"};
+            "ear","toilet_tissue"];
     }
 }

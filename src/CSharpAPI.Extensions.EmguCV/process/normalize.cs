@@ -58,6 +58,5 @@ namespace OpenVinoSharp.Extensions.process
             im.ConvertTo(im, DepthType.Cv32F, e);
             return im;
         }
-
     }
 }

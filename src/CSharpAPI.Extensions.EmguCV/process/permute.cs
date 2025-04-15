@@ -45,7 +45,7 @@ namespace OpenVinoSharp.Extensions.process
                 IntPtr resultPtr = resultHandle.AddrOfPinnedObject();
                 for (int i = 0; i < rc; ++i)
                 {
-                    using Mat dest = new Mat(rh, rw, DepthType.Cv32F, 1, resultPtr + i * rh * rw * 4, rw * 4);
+                    using Mat dest = new Mat(rh, rw, DepthType.Cv32F, 1, resultPtr + (i * rh * rw * 4), rw * 4);
                     CvInvoke.ExtractChannel(im, dest, i);
                 }
             }
@@ -55,8 +55,6 @@ namespace OpenVinoSharp.Extensions.process
             }
             return res;
         }
-
-
     }
     public static class PermuteBatch
     {
@@ -77,7 +75,7 @@ namespace OpenVinoSharp.Extensions.process
                 {
                     for (int i = 0; i < rc; ++i)
                     {
-                        using Mat dest = new Mat(rh, rw, DepthType.Cv32F, 1, resultPtr + (i + j * rc) * rh * rw * 4, rw * 4);
+                        using Mat dest = new Mat(rh, rw, DepthType.Cv32F, 1, resultPtr + ((i + (j * rc)) * rh * rw * 4), rw * 4);
                         CvInvoke.ExtractChannel(imgs[j], dest, i);
                     }
                 }

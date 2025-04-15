@@ -94,7 +94,6 @@ namespace OpenVinoSharp
             {
                 ptr_null_exception();
             }
-
         }
         /// <summary>
         /// Throw GENERAL_ERROR OpenVINOException.
@@ -120,7 +119,6 @@ namespace OpenVinoSharp
         {
             throw new OVException(ExceptionStatus.NETWORK_NOT_LOADED, Marshal.PtrToStringAnsi(NativeMethods.ov_get_last_err_msg()));
         }
-
 
         /// <summary>
         /// Throw PARAMETER_MISMATCH OpenVINOException.
@@ -149,7 +147,6 @@ namespace OpenVinoSharp
             throw new OVException(ExceptionStatus.OUT_OF_BOUNDS, Marshal.PtrToStringAnsi(NativeMethods.ov_get_last_err_msg()));
         }
 
-
         /// <summary>
         /// Throw UNEXPECTED OpenVINOException.
         /// </summary>
@@ -158,8 +155,6 @@ namespace OpenVinoSharp
         {
             throw new OVException(ExceptionStatus.UNEXPECTED, Marshal.PtrToStringAnsi(NativeMethods.ov_get_last_err_msg()));
         }
-
-
 
         /// <summary>
         /// Throw REQUEST_BUSY OpenVINOException.

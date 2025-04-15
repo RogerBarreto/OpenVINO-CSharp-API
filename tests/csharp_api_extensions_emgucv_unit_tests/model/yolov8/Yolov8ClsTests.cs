@@ -1,13 +1,6 @@
 ﻿using Emgu.CV;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenVinoSharp.Extensions.model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenVinoSharp.Extensions.result;
-using OpenVinoSharp.Extensions.model;
 
 namespace OpenVinoSharp.Extensions.model.Tests
 {
@@ -32,10 +25,7 @@ namespace OpenVinoSharp.Extensions.model.Tests
         public void predict_test1()
         {
             Yolov8Cls yolo = new Yolov8Cls(model_xml_path);
-            List<Mat> images = new List<Mat>();
-            images.Add(CvInvoke.Imread(image_path));
-            images.Add(CvInvoke.Imread(image_path1));
-            images.Add(CvInvoke.Imread(image_path2));
+            List<Mat> images = [CvInvoke.Imread(image_path), CvInvoke.Imread(image_path1), CvInvoke.Imread(image_path2)];
             List<ClsResult> results = yolo.predict(images);
             results[0].update_lable(ImageNetOption.lables);
             results[1].update_lable(ImageNetOption.lables);

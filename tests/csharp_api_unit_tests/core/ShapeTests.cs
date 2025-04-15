@@ -19,8 +19,8 @@ namespace OpenVinoSharp.Tests
         [TestMethod()]
         public void Shape_test1()
         {
-            List<long> data = new List<long>() { 1, 2, 3 };
-            Shape shape = new Shape(data);
+            List<long> data = [1, 2, 3];
+            Shape shape = [.. data];
             shape.Dispose();
         }
 
@@ -28,7 +28,7 @@ namespace OpenVinoSharp.Tests
         public void Shape_test2()
         {
             long[] data = new long[] { 1, 2, 3 };
-            Shape shape = new Shape(data);
+            Shape shape = [.. data];
             shape.Dispose();
         }
 

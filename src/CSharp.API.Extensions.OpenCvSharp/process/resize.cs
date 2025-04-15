@@ -74,14 +74,18 @@ namespace OpenVinoSharp.Extensions.process
             float ratio = (float)img.Cols / (float)img.Rows;
             int resize_w, resize_h;
             if (Math.Ceiling(imgH * ratio) > imgW)
+            {
                 resize_w = imgW;
+            }
             else
+            {
                 resize_w = (int)(Math.Ceiling(imgH * ratio));
+            }
+
             Mat resize_img = new Mat();
             Cv2.Resize(img, resize_img, new Size(resize_w, imgH), 0.0f, 0.0f, InterpolationFlags.Linear);
             return resize_img;
         }
-
 
         public static Mat crnn_img(Mat img, float wh_ratio, int[] rec_image_shape)
         {
@@ -96,9 +100,14 @@ namespace OpenVinoSharp.Extensions.process
             int resize_w, resize_h;
 
             if (Math.Ceiling(imgH * ratio) > imgW)
+            {
                 resize_w = imgW;
+            }
             else
+            {
                 resize_w = (int)(Math.Ceiling(imgH * ratio));
+            }
+
             Mat resize_img = new Mat();
             Cv2.Resize(img, resize_img, new Size(resize_w, imgH), 0.0f, 0.0f, InterpolationFlags.Linear);
             Cv2.CopyMakeBorder(resize_img, resize_img, 0, 0, 0, (int)(imgW - resize_img.Cols), BorderTypes.Constant, new Scalar(127, 127, 127));
@@ -117,6 +126,5 @@ namespace OpenVinoSharp.Extensions.process
             scales = (float)((float)max_image_length / (float)length);
             return resize_img;
         }
-
     }
 }

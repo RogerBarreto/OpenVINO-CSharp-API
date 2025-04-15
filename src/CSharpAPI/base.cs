@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace OpenVinoSharp
 {
 
@@ -31,7 +30,6 @@ namespace OpenVinoSharp
         }
     }
 
-
     namespace preprocess {
         /// <summary>
         /// Mainly defined the data processing methods in OpenVINO.
@@ -43,5 +41,4 @@ namespace OpenVinoSharp
         }
     }
 }
-
 

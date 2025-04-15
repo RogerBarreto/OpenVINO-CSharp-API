@@ -27,7 +27,7 @@ namespace OpenVinoSharp.Tests
         [TestMethod()]
         public void PartialShape_test2()
         {
-            List<Dimension> dimensions = new List<Dimension> { new Dimension(10), new Dimension(10), new Dimension(10) };
+            List<Dimension> dimensions = [new Dimension(10), new Dimension(10), new Dimension(10)];
             PartialShape shape = new PartialShape(dimensions);
             Assert.IsNotNull(shape);
         }
@@ -45,7 +45,7 @@ namespace OpenVinoSharp.Tests
         public void PartialShape_test4()
         {
             Dimension rank = new Dimension(3);
-            List<Dimension> dimensions = new List<Dimension> { new Dimension(10), new Dimension(10), new Dimension(10) };
+            List<Dimension> dimensions = [new Dimension(10), new Dimension(10), new Dimension(10)];
             PartialShape shape = new PartialShape(rank, dimensions);
             Assert.IsNotNull(shape);
         }
@@ -63,7 +63,7 @@ namespace OpenVinoSharp.Tests
         public void PartialShape_test6()
         {
             long rank = 3;
-            List<long> dimensions = new List<long> { 10, 10, 10 };
+            List<long> dimensions = [10, 10, 10];
             PartialShape shape = new PartialShape(rank, dimensions);
             Assert.IsNotNull(shape);
         }

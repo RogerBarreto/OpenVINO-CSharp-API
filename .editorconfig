@@ -1,4 +1,48 @@
 ﻿[*.cs]
 
-# Default severity for analyzer diagnostics with category 'Style'
-dotnet_analyzer_diagnostic.category-Style.severity = none
+# CS1591: Missing XML comment for publicly visible type or member
+dotnet_diagnostic.CS1591.severity = none
+
+# CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+dotnet_diagnostic.CS8632.severity = none
+
+# CS0114: Member hides inherited member; missing override keyword
+dotnet_diagnostic.CS0114.severity = none
+
+# CS0108: Member hides inherited member; missing new keyword
+dotnet_diagnostic.CS0108.severity = none
+
+# IDE0022: Use block body for method
+dotnet_diagnostic.IDE0022.severity = none
+
+# IDE1006: Name rule violated
+dotnet_diagnostic.IDE1006.severity = none
+
+# IDE0009: Add this qualifier
+dotnet_diagnostic.IDE0009.severity = none
+
+# IDE0017: Simplify object initialization
+dotnet_diagnostic.IDE0017.severity = none
+
+# IDE0047: Parentheses can be removed
+dotnet_diagnostic.IDE0047.severity = none
+
+[*.cs]
+#### Naming styles ####
+
+# Naming rules
+
+# CS0168: Variable is declared but never used
+dotnet_diagnostic.CS0168.severity = none
+
+# CS0414: Field is assigned but its value is never used
+dotnet_diagnostic.CS0414.severity = none
+
+# CS0169: Field is never used
+dotnet_diagnostic.CS0169.severity = none
+
+[*.{cs,vb}]
+dotnet_style_operator_placement_when_wrapping = beginning_of_line
+tab_width = 4
+indent_size = 4
+end_of_line = crlf

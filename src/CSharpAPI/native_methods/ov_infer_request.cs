@@ -204,7 +204,6 @@ namespace OpenVinoSharp
             CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public extern static ExceptionStatus ov_infer_request_cancel(IntPtr infer_request);
 
-
         /// <summary>
         /// Start inference of specified input(s) in asynchronous mode.
         /// </summary>
@@ -270,7 +269,6 @@ namespace OpenVinoSharp
         [DllImport(dll_extern, EntryPoint = "ov_profiling_info_list_free",
             CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         public extern static ExceptionStatus ov_profiling_info_list_free(IntPtr profiling_infos);
-
 
     }
 }

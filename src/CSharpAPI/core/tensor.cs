@@ -181,7 +181,7 @@ namespace OpenVinoSharp
         /// <summary>
         /// Set new shape for tensor, deallocate/allocate if new total size is bigger than previous one.
         /// </summary>
-        /// <exception cref="">Memory allocation may happen</exception>
+        /// <exception cref="Exception">Memory allocation may happen</exception>
         /// <param name="shape"> A new shape</param>
         public void set_shape(Shape shape) 
         {
@@ -373,8 +373,6 @@ namespace OpenVinoSharp
                 Console.WriteLine("Data format error, not supported. Only double, flaot, int, long, shaort and byte data formats are supported");
                 return result;
             }
-
         }
-
     }
 }

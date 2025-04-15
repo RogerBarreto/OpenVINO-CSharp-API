@@ -25,12 +25,12 @@ namespace OpenVinoSharp.Extensions.result
         public PosePoint(float[] data, float scales)
         {
             score = new float[data.Length];
-            point = new List<Point>();
+            point = [];
             for (int i = 0; i < 17; i++)
             {
-                Point p = new Point((int)(data[3 * i] * scales), (int)(data[3 * i + 1] * scales));
+                Point p = new Point((int)(data[3 * i] * scales), (int)(data[(3 * i) + 1] * scales));
                 this.point.Add(p);
-                this.score[i] = data[3 * i + 2];
+                this.score[i] = data[(3 * i) + 2];
             }
         }
         /// <summary>
@@ -118,13 +118,15 @@ namespace OpenVinoSharp.Extensions.result
             string msg = "";
             msg += ("index: " + index.ToString() + "\t");
             if (lable != null)
+            {
                 msg += ("lable: " + lable.ToString() + "\t");
+            }
+
             msg += ("score: " + score.ToString(format) + "\t");
             msg += ("box: " + box.ToString() + "\t");
             msg += ("pose: " + pose_point.to_string(format));
             return msg;
         }
-
     }
     public class PoseResult : Result<PoseData>
     {
@@ -135,6 +137,7 @@ namespace OpenVinoSharp.Extensions.result
         /// <param name="lable">Identification result label.</param>
         /// <param name="score">Identification result score.</param>
         /// <param name="box">Identification result box.</param>
+        /// <param name="point"></param>
         public override void add(int index, string lable, float score, Rect box, PosePoint point)
         {
             PoseData data = new PoseData(index, lable, score, box, point);
@@ -165,9 +168,13 @@ namespace OpenVinoSharp.Extensions.result
         public override void sort_by_score(bool flag = true)
         {
             if (flag)
+            {
                 this.sort((x, y) => x.score.CompareTo(y.score));
+            }
             else
+            {
                 this.sort((x, y) => y.score.CompareTo(x.score));
+            }
         }
         /// <summary>
         /// Sorts the box elements in the entire inference results using the default comparer.

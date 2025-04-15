@@ -71,7 +71,7 @@ namespace OpenVinoSharp.Extensions
                 float max = float.MaxValue;
                 for (int i = 0; i < length; ++i)
                 {
-                    tmp[i] = (float)rd.NextDouble() * (max - min) + min;
+                    tmp[i] = ((float)rd.NextDouble() * (max - min)) + min;
                 }
                 result = (T[])Convert.ChangeType(tmp, typeof(T[]));
             }
@@ -82,7 +82,7 @@ namespace OpenVinoSharp.Extensions
                 double max = double.MaxValue;
                 for (int i = 0; i < length; ++i)
                 {
-                    tmp[i] = (double)rd.NextDouble() * (max - min) + min;
+                    tmp[i] = ((double)rd.NextDouble() * (max - min)) + min;
                 }
                 result = (T[])Convert.ChangeType(tmp, typeof(T[]));
             }
@@ -125,7 +125,6 @@ namespace OpenVinoSharp.Extensions
                     break;
             }
         }
-
     }
 
     class LatencyMetrics
@@ -136,8 +135,6 @@ namespace OpenVinoSharp.Extensions
                     string data_shape = "",
                     int percentile_boundary = 50)      
         {
-            percentile_boundary = percentile_boundary;
-            data_shape = data_shape;
             fill_data(latencies, percentile_boundary);
         }
 
@@ -173,5 +170,4 @@ namespace OpenVinoSharp.Extensions
         }
         private int percentile_boundary = 50;
     };
-
 }

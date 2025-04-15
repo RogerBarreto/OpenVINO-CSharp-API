@@ -55,6 +55,5 @@ namespace OpenVinoSharp.Extensions.process
             im.ConvertTo(im, MatType.CV_32FC3, e);
             return im;
         }
-
     }
 }

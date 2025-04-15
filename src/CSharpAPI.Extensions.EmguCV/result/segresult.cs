@@ -74,7 +74,10 @@ namespace OpenVinoSharp.Extensions.result
             string msg = "";
             msg += ("index: " + index.ToString() + "\t");
             if (lable != null)
+            {
                 msg += ("lable: " + lable.ToString() + "\t");
+            }
+
             msg += ("score: " + score.ToString(format) + "\t");
             msg += ("box: " + box.ToString() + "\t");
             return msg;
@@ -117,9 +120,13 @@ namespace OpenVinoSharp.Extensions.result
         public override void sort_by_index(bool flag = true)
         {
             if (flag)
+            {
                 this.sort((x, y) => x.index.CompareTo(y.index));
+            }
             else
+            {
                 this.sort((x, y) => y.index.CompareTo(x.index));
+            }
         }
         /// <summary>
         /// Sorts the score elements in the entire inference results using the default comparer.
@@ -128,9 +135,13 @@ namespace OpenVinoSharp.Extensions.result
         public override void sort_by_score(bool flag = true)
         {
             if (flag)
+            {
                 this.sort((x, y) => x.score.CompareTo(y.score));
+            }
             else
+            {
                 this.sort((x, y) => y.score.CompareTo(x.score));
+            }
         }
         /// <summary>
         /// Sorts the box elements in the entire inference results using the default comparer.

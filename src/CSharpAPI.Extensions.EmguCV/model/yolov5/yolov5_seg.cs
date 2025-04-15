@@ -51,7 +51,7 @@ namespace OpenVinoSharp.Extensions.model
         public SegResult predict(Mat image)
         {
             Mat mat = new Mat();
-            m_image_sizes = new List<Size>() { image.Size };
+            m_image_sizes = [image.Size];
             CvInvoke.CvtColor(image, mat, Emgu.CV.CvEnum.ColorConversion.Bgr2Rgb);
             m_factors = new float[1];
             mat = Resize.letterbox_img(mat, (int)m_input_size[2], out m_factors[0]);
@@ -73,16 +73,15 @@ namespace OpenVinoSharp.Extensions.model
 
         }
 
-
         public List<SegResult> predict(List<Mat> images)
         {
-            List<SegResult> re_results = new List<SegResult>();
+            List<SegResult> re_results = [];
             for (int beg_img_no = 0; beg_img_no < images.Count; beg_img_no += m_batch_num)
             {
 
                 int end_img_no = Math.Min(images.Count, beg_img_no + m_batch_num);
                 int batch_num = end_img_no - beg_img_no;
-                List<Mat> norm_img_batch = new List<Mat>();
+                List<Mat> norm_img_batch = [];
                 m_factors = new float[batch_num];
                 m_image_sizes = new List<Size>(batch_num);
                 for (int ino = beg_img_no; ino < end_img_no; ino++)
@@ -96,7 +95,7 @@ namespace OpenVinoSharp.Extensions.model
                 }
                 float[] input_data = PermuteBatch.run(norm_img_batch);
                 Tensor input_tensor = m_infer_request.get_input_tensor();
-                input_tensor.set_shape(new Shape(new long[] { batch_num, 3, m_input_size[2], m_input_size[3] }));
+                input_tensor.set_shape([.. new long[] { batch_num, 3, m_input_size[2], m_input_size[3] }]);
                 input_tensor.set_data<float>(input_data);
                 m_infer_request.infer();
                 Tensor output_tensor_0 = m_infer_request.get_output_tensor(0);
@@ -119,10 +118,11 @@ namespace OpenVinoSharp.Extensions.model
         /// </summary>
         /// <param name="detect">detection output</param>
         /// <param name="proto">segmentation output</param>
+        /// <param name="batch"></param>
         /// <returns></returns>
         public List<SegResult> process_result(float[] detect, float[] proto, int batch)
         {
-            List<SegResult> re_result = new List<SegResult>();
+            List<SegResult> re_result = [];
             for (int b = 0; b < batch; ++b)
             {
                 Mat detect_data = new Mat( m_output_length, 37 + m_categ_nums, DepthType.Cv32F, 1,
@@ -130,10 +130,10 @@ namespace OpenVinoSharp.Extensions.model
                 Mat proto_data = new Mat(32, 25600, DepthType.Cv32F, 1,
                     Marshal.UnsafeAddrOfPinnedArrayElement(proto, 32 * 25600 * b * 4), 4 * 25600);
                 //detect_data = detect_data.T();
-                List<Rectangle> position_boxes = new List<Rectangle>();
-                List<int> class_ids = new List<int>();
-                List<float> confidences = new List<float>();
-                List<Mat> masks = new List<Mat>();
+                List<Rectangle> position_boxes = [];
+                List<int> class_ids = [];
+                List<float> confidences = [];
+                List<Mat> masks = [];
                 for (int i = 0; i < detect_data.Rows; i++)
                 {
                     Mat mat = new Mat(detect_data, new Rectangle(0, i, 5, 1));
@@ -158,8 +158,8 @@ namespace OpenVinoSharp.Extensions.model
                         float cy = data[0, 1];
                         float ow = data[0, 2];
                         float oh = data[0, 3];
-                        int x = (int)((cx - 0.5 * ow) * this.m_factors[b]);
-                        int y = (int)((cy - 0.5 * oh) * this.m_factors[b]);
+                        int x = (int)((cx - (0.5 * ow)) * this.m_factors[b]);
+                        int y = (int)((cy - (0.5 * oh)) * this.m_factors[b]);
                         int width = (int)(ow * this.m_factors[b]);
                         int height = (int)(oh * this.m_factors[b]);
                         Rectangle box = new Rectangle();
@@ -174,7 +174,6 @@ namespace OpenVinoSharp.Extensions.model
                         masks.Add(mask);
                     }
                 }
-
 
                 int[] indexes = DnnInvoke.NMSBoxes(position_boxes.ToArray(), confidences.ToArray(), this.m_det_thresh, this.m_det_nms_thresh);
 
@@ -197,7 +196,6 @@ namespace OpenVinoSharp.Extensions.model
 
                     // Segmentation results
                     //Mat original_mask = new Mat(32,32, DepthType.Cv32F, 1);
-
 
                     Matrix<float> xx = new Matrix<float>(masks[index].Rows, masks[index].Cols);
                     masks[index].CopyTo(xx);
@@ -276,7 +274,5 @@ namespace OpenVinoSharp.Extensions.model
 
             return re_result;
         }
-
-
     }
 }

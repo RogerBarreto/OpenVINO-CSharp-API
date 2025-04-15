@@ -44,10 +44,7 @@ namespace OpenVinoSharp.Extensions.model.Tests
         {
             Yolov5SegConfig config = new Yolov5SegConfig(model_xml_path);
             Yolov5Seg yolo = new Yolov5Seg(config);
-            List<Mat> images = new List<Mat>();
-            images.Add(CvInvoke.Imread(image_path));
-            images.Add(CvInvoke.Imread(image_path1));
-            images.Add(CvInvoke.Imread(image_path2));
+            List<Mat> images = [CvInvoke.Imread(image_path), CvInvoke.Imread(image_path1), CvInvoke.Imread(image_path2)];
             List<SegResult> results = yolo.predict(images);
             Mat im = Visualize.draw_seg_result(results[0], images[0]);
             CvInvoke.Imshow("ww", im);

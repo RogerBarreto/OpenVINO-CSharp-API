@@ -148,6 +148,4 @@ namespace OpenVinoSharp.preprocess
             return new Model(model_ptr);
         } 
     }
-
-   
 }

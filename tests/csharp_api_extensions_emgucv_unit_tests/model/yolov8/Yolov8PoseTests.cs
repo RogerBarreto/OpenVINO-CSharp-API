@@ -41,10 +41,7 @@ namespace OpenVinoSharp.Extensions.model.Tests
         public void predict_test1()
         {
             Yolov8Pose yolo = new Yolov8Pose(model_xml_path);
-            List<Mat> images = new List<Mat>();
-            images.Add(CvInvoke.Imread(image_path));
-            images.Add(CvInvoke.Imread(image_path1));
-            images.Add(CvInvoke.Imread(image_path2));
+            List<Mat> images = [CvInvoke.Imread(image_path), CvInvoke.Imread(image_path1), CvInvoke.Imread(image_path2)];
             List<PoseResult> results = yolo.predict(images);
             Mat im = Visualize.draw_poses(results[0], images[0], 0.2f);
             //CvInvoke.Imshow("ww", im);

@@ -455,11 +455,11 @@ namespace OpenVinoSharp.Tests
         [TestMethod()]
         public void reshape_test()
         {
-            Shape shape = new Shape(new long[4] { 1, 3, 640, 640 });
+            Shape shape = [.. new long[4] { 1, 3, 640, 640 }];
 
             PartialShape partial = new PartialShape(shape);
 
-            Dictionary<string, PartialShape> pairs = new Dictionary<string, PartialShape>();
+            Dictionary<string, PartialShape> pairs = [];
 
             Assert.IsTrue(partial.get_partial_shape().rank.max == 4);
             pairs.Add(model_input_name(), partial);
@@ -479,7 +479,7 @@ namespace OpenVinoSharp.Tests
         [TestMethod()]
         public void reshape_test1()
         {
-            Shape shape = new Shape(new long[4] { 1, 3, 640, 640 });
+            Shape shape = [.. new long[4] { 1, 3, 640, 640 }];
             PartialShape partial = new PartialShape(shape);
             Assert.IsTrue(partial.get_partial_shape().rank.max == 4);
             var core = new Core();
@@ -494,11 +494,11 @@ namespace OpenVinoSharp.Tests
         [TestMethod()]
         public void reshape_test2()
         {
-            Shape shape = new Shape(new long[4] { 1, 3, 640, 640 });
+            Shape shape = [.. new long[4] { 1, 3, 640, 640 }];
 
             PartialShape partial = new PartialShape(shape);
 
-            Dictionary<ulong, PartialShape> pairs = new Dictionary<ulong, PartialShape>();
+            Dictionary<ulong, PartialShape> pairs = [];
 
             Assert.IsTrue(partial.get_partial_shape().rank.max == 4);
             pairs.Add(0, partial);
@@ -517,11 +517,11 @@ namespace OpenVinoSharp.Tests
         [TestMethod()]
         public void reshape_test3()
         {
-            Shape shape = new Shape(new long[4] { 1, 3, 640, 640 });
+            Shape shape = [.. new long[4] { 1, 3, 640, 640 }];
 
             PartialShape partial = new PartialShape(shape);
 
-            Dictionary<Node, PartialShape> pairs = new Dictionary<Node, PartialShape>();
+            Dictionary<Node, PartialShape> pairs = [];
 
             Assert.IsTrue(partial.get_partial_shape().rank.max == 4);
       

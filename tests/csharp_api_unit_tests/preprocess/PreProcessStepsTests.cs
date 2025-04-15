@@ -101,7 +101,6 @@ namespace OpenVinoSharp.preprocess.Tests
             PreProcessSteps process_steps = input.preprocess();
             Assert.IsTrue(process_steps.Ptr != IntPtr.Zero);
 
-
             int[] begin = { 0, 0, 5, 10 };
             int[] end = { 1, 3, 15, 20 };
 
@@ -127,9 +126,8 @@ namespace OpenVinoSharp.preprocess.Tests
             PreProcessSteps process_steps = input.preprocess();
             Assert.IsTrue(process_steps.Ptr != IntPtr.Zero);
 
-
-            List<int> begin = new List<int> { 0, 0, 5, 10 };
-           List<int> end = new List<int>{ 1, 3, 15, 20 };
+            List<int> begin = [0, 0, 5, 10];
+           List<int> end = [1, 3, 15, 20];
 
             process_steps.crop(begin, end);
 

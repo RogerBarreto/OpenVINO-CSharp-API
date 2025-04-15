@@ -43,13 +43,13 @@ namespace OpenVinoSharp.Extensions.model.Tests
         [TestMethod()]
         public void predict_test1()
         {
-            List<Mat> images = new List<Mat>()
-            {
+            List<Mat> images =
+            [
                 Cv2.ImRead(image_path),
                 Cv2.ImRead(image_path1),
                 Cv2.ImRead(image_path2),
                  Cv2.ImRead(image_path3)
-            };
+            ];
             PPYoloeConfig config = new PPYoloeConfig(model_path);
             config.batch_num = 4;
             PPYoloeDet yoloe = new PPYoloeDet((PPYoloeConfig)config);

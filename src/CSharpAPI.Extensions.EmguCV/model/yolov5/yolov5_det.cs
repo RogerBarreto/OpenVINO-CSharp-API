@@ -48,12 +48,12 @@ namespace OpenVinoSharp.Extensions.model
 
         public List<DetResult> predict(List<Mat> images)
         {
-            List<DetResult> re_results = new List<DetResult>();
+            List<DetResult> re_results = [];
             for (int beg_img_no = 0; beg_img_no < images.Count; beg_img_no += m_batch_num)
             {
                 int end_img_no = Math.Min(images.Count, beg_img_no + m_batch_num);
                 int batch_num = end_img_no - beg_img_no;
-                List<Mat> norm_img_batch = new List<Mat>();
+                List<Mat> norm_img_batch = [];
                 m_factors = new float[batch_num];
                 for (int ino = beg_img_no; ino < end_img_no; ino++)
                 {
@@ -72,15 +72,15 @@ namespace OpenVinoSharp.Extensions.model
 
         }
 
-
         /// <summary>
         /// Result process
         /// </summary>
         /// <param name="result">Model prediction output</param>
+        /// <param name="batch"></param>
         /// <returns>Model recognition results</returns>
         public List<DetResult> process_result(float[] result, int batch)
         {
-            List<DetResult> re_result = new List<DetResult>();
+            List<DetResult> re_result = [];
             for (int b = 0; b < batch; ++b)
             {
                 Mat result_data = new Mat(m_output_length, 5 + m_categ_nums, DepthType.Cv32F, 1,
@@ -88,9 +88,9 @@ namespace OpenVinoSharp.Extensions.model
                 //result_data = result_data.T();
 
                 // Storage results list
-                List<Rectangle> position_boxes = new List<Rectangle>();
-                List<int> class_ids = new List<int>();
-                List<float> confidences = new List<float>();
+                List<Rectangle> position_boxes = [];
+                List<int> class_ids = [];
+                List<float> confidences = [];
                 // Preprocessing output results
                 for (int i = 0; i < result_data.Rows; i++)
                 {
@@ -116,8 +116,8 @@ namespace OpenVinoSharp.Extensions.model
                         float cy = data[0, 1];
                         float ow = data[0, 2];
                         float oh = data[0, 3];
-                        int x = (int)((cx - 0.5 * ow) * this.m_factors[b]);
-                        int y = (int)((cy - 0.5 * oh) * this.m_factors[b]);
+                        int x = (int)((cx - (0.5 * ow)) * this.m_factors[b]);
+                        int y = (int)((cy - (0.5 * oh)) * this.m_factors[b]);
                         int width = (int)(ow * this.m_factors[b]);
                         int height = (int)(oh * this.m_factors[b]);
                         Rectangle box = new Rectangle();

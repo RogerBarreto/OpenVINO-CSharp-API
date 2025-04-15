@@ -21,8 +21,8 @@ namespace OpenVinoSharp.Extensions.model
         private long[] m_input_size;
         private int m_batch_num;
         public bool m_post_flag;
-        private List<float[]> m_factors = new List<float[]>();
-        public List<float[]> m_im_shape = new List<float[]>();
+        private List<float[]> m_factors = [];
+        public List<float[]> m_im_shape = [];
         public RtdetrDet(RtdetrConfig config)
             : base(config.model_path, config.device, config.cache_dir, config.use_gpu, config.input_size)
         {
@@ -33,13 +33,10 @@ namespace OpenVinoSharp.Extensions.model
             this.m_post_flag = config.postprcoess;
         }
 
-
         /// <summary>
         /// The function takes an input image, preprocesses it, performs inference using a pre-trained
         /// model, and returns the image with bounding boxes drawn around detected objects.
         /// </summary>
-        /// <param name="Mat">The `Mat` class is a data structure in OpenCV that represents an image
-        /// matrix. It is used to store and manipulate image data.</param>
         /// <returns>
         /// The method is returning a `Mat` object, which is an image with bounding boxes drawn on it.
         /// </returns>
@@ -48,9 +45,8 @@ namespace OpenVinoSharp.Extensions.model
             Mat mat = new Mat();
             CvInvoke.CvtColor(image, mat, ColorConversion.Bgr2Rgb);
             CvInvoke.Resize(mat, mat, new Size((int)m_input_size[2], (int)m_input_size[3]));
-            m_factors.Clear(); m_factors = new List<float[]>();
-            m_im_shape.Clear(); m_im_shape = new List<float[]>();
-            m_im_shape.Add( new float[] { (float)mat.Rows, (float)mat.Cols });
+            m_factors.Clear(); m_factors = [];
+            m_im_shape.Clear(); m_im_shape = [new float[] { (float)mat.Rows, (float)mat.Cols }];
             m_factors.Add( new float[] { 640.0f / (float)image.Rows, 640.0f / (float)image.Cols });
             mat = Normalize.run(mat, true);
             float[] input_data = Permute.run(mat);
@@ -59,9 +55,9 @@ namespace OpenVinoSharp.Extensions.model
                 Tensor image_tensor = m_infer_request.get_tensor("image");
                 Tensor shape_tensor = m_infer_request.get_tensor("im_shape");
                 Tensor scale_tensor = m_infer_request.get_tensor("scale_factor");
-                image_tensor.set_shape(new Shape(new List<long> { 1, 3, 640, 640 }));
-                shape_tensor.set_shape(new Shape(new List<long> { 1, 2 }));
-                scale_tensor.set_shape(new Shape(new List<long> { 1, 2 }));
+                image_tensor.set_shape([.. new List<long> { 1, 3, 640, 640 }]);
+                shape_tensor.set_shape([.. new List<long> { 1, 2 }]);
+                scale_tensor.set_shape([.. new List<long> { 1, 2 }]);
                 image_tensor.set_data(input_data);
                 shape_tensor.set_data(m_im_shape[0]);
                 scale_tensor.set_data(m_factors[0]);
@@ -69,7 +65,7 @@ namespace OpenVinoSharp.Extensions.model
             else
             {
                 Tensor image_tensor = m_infer_request.get_input_tensor();
-                image_tensor.set_shape(new Shape(new List<long> { 1, 3, 640, 640 }));
+                image_tensor.set_shape([.. new List<long> { 1, 3, 640, 640 }]);
                 image_tensor.set_data(input_data);
             }
             m_infer_request.infer();
@@ -94,14 +90,14 @@ namespace OpenVinoSharp.Extensions.model
 
         public List<DetResult> predict(List<Mat> images)
         {
-            List<DetResult> re_results = new List<DetResult>();
+            List<DetResult> re_results = [];
             for (int beg_img_no = 0; beg_img_no < images.Count; beg_img_no += m_batch_num)
             {
                 int end_img_no = Math.Min(images.Count, beg_img_no + m_batch_num);
                 int batch_num = end_img_no - beg_img_no;
-                List<Mat> norm_img_batch = new List<Mat>();
-                m_factors.Clear(); m_factors = new List<float[]>();
-                m_im_shape.Clear(); m_im_shape = new List<float[]>();
+                List<Mat> norm_img_batch = [];
+                m_factors.Clear(); m_factors = [];
+                m_im_shape.Clear(); m_im_shape = [];
                 for (int ino = beg_img_no; ino < end_img_no; ino++)
                 {
                     Mat mat = new Mat();
@@ -120,9 +116,9 @@ namespace OpenVinoSharp.Extensions.model
                     Tensor image_tensor = m_infer_request.get_tensor("image");
                     Tensor shape_tensor = m_infer_request.get_tensor("im_shape");
                     Tensor scale_tensor = m_infer_request.get_tensor("scale_factor");
-                    image_tensor.set_shape(new Shape(new List<long> { batch_num, 3, 640, 640 }));
-                    shape_tensor.set_shape(new Shape(new List<long> { batch_num, 2 }));
-                    scale_tensor.set_shape(new Shape(new List<long> { batch_num, 2 }));
+                    image_tensor.set_shape([.. new List<long> { batch_num, 3, 640, 640 }]);
+                    shape_tensor.set_shape([.. new List<long> { batch_num, 2 }]);
+                    scale_tensor.set_shape([.. new List<long> { batch_num, 2 }]);
                     image_tensor.set_data(input_data);
                     shape_tensor.set_data(list_to_array(m_im_shape));
                     scale_tensor.set_data(list_to_array(m_factors));
@@ -130,11 +126,11 @@ namespace OpenVinoSharp.Extensions.model
                 else
                 {
                     Tensor image_tensor = m_infer_request.get_input_tensor();
-                    image_tensor.set_shape(new Shape(new List<long> {batch_num, 3, 640, 640 }));
+                    image_tensor.set_shape([.. new List<long> {batch_num, 3, 640, 640 }]);
                     image_tensor.set_data(input_data);
                 }
                 m_infer_request.infer();
-                List<DetResult> results = new List<DetResult> ();
+                List<DetResult> results = [];
                 if (m_post_flag)
                 {
                     Tensor output_tensor = m_infer_request.get_output_tensor(0);
@@ -165,12 +161,14 @@ namespace OpenVinoSharp.Extensions.model
         /// <param name="bbox">The `bbox` parameter is an array of floats that represents the bounding
         /// box coordinates for each detected object. Each object is represented by 4 values in the
         /// array, which correspond to the x-coordinate, y-coordinate, width, and height of the bounding
+        /// </param>
+        /// <param name="batch"></param>
         /// <returns>
         /// The method is returning an object of type ResultData.
         /// </returns>
         public List<DetResult> postprocess(float[] score, float[] bbox, int batch)
         {
-            List<DetResult> re_result = new List<DetResult>();
+            List<DetResult> re_result = [];
             for (int b = 0; b < batch; ++b)
             {
                 DetResult result = new DetResult();
@@ -178,13 +176,13 @@ namespace OpenVinoSharp.Extensions.model
                 {
                     for (int i = 0; i < 300; ++i)
                     {
-                        if (score[b * 1800 + 6 * i + 1] > m_det_thresh)
+                        if (score[(b * 1800) + (6 * i) + 1] > m_det_thresh)
                         {
 
-                            result.add((int)score[b * 1800 + 6 * i], score[b * 1800 + 6 * i + 1],
-                                new Rectangle((int)score[b * 1800 + 6 * i + 2], (int)score[b * 1800 + 6 * i + 3],
-                                (int)(score[b * 1800 + 6 * i + 4] - score[b * 1800 + 6 * i + 2]),
-                                (int)(score[b * 1800 + 6 * i + 5] - score[b * 1800 + 6 * i + 3])));
+                            result.add((int)score[(b * 1800) + (6 * i)], score[(b * 1800) + (6 * i) + 1],
+                                new Rectangle((int)score[(b * 1800) + (6 * i) + 2], (int)score[(b * 1800) + (6 * i) + 3],
+                                (int)(score[(b * 1800) + (6 * i) + 4] - score[(b * 1800) + (6 * i) + 2]),
+                                (int)(score[(b * 1800) + (6 * i) + 5] - score[(b * 1800) + (6 * i) + 3])));
                         }
                     }
                 }
@@ -195,18 +193,18 @@ namespace OpenVinoSharp.Extensions.model
                         float[] s = new float[m_categ_nums];
                         for (int j = 0; j < m_categ_nums; ++j)
                         {
-                            s[j] = score[b * 24000 + m_categ_nums * i + j];
+                            s[j] = score[(b * 24000) + (m_categ_nums * i) + j];
                         }
                         int clsid = argmax(s, m_categ_nums);
                         float max_score = sigmoid(s[clsid]);
                         if (max_score > m_det_thresh)
                         {
-                            float cx = (float)(bbox[b * 1200 + 4 * i] * 640.0 / m_factors[b][1]);
-                            float cy = (float)(bbox[b * 1200 + 4 * i + 1] * 640.0 / m_factors[b][0]);
-                            float w = (float)(bbox[b * 1200 + 4 * i + 2] * 640.0 / m_factors[b][1]);
-                            float h = (float)(bbox[b * 1200 + 4 * i + 3] * 640.0 / m_factors[b][0]);
+                            float cx = (float)(bbox[(b * 1200) + (4 * i)] * 640.0 / m_factors[b][1]);
+                            float cy = (float)(bbox[(b * 1200) + (4 * i) + 1] * 640.0 / m_factors[b][0]);
+                            float w = (float)(bbox[(b * 1200) + (4 * i) + 2] * 640.0 / m_factors[b][1]);
+                            float h = (float)(bbox[(b * 1200) + (4 * i) + 3] * 640.0 / m_factors[b][0]);
 
-                            result.add(clsid, max_score, new Rectangle((int)(cx - w / 2), (int)(cy - h / 2), (int)w, (int)h));
+                            result.add(clsid, max_score, new Rectangle((int)(cx - (w / 2)), (int)(cy - (h / 2)), (int)w, (int)h));
                         }
                     }
                 }
@@ -215,7 +213,6 @@ namespace OpenVinoSharp.Extensions.model
         
             return re_result;
         }
-
 
         /// <summary>
         /// The sigmoid function takes in a float value and returns the result of applying the sigmoid function
@@ -243,7 +240,7 @@ namespace OpenVinoSharp.Extensions.model
         /// </returns>
         private int argmax(float[] data, int length)
         {
-            List<float> arr = new List<float>(data);
+            List<float> arr = [.. data];
             float max = arr.Max();
             return arr.FindIndex(val => val == max);
         }
@@ -252,6 +249,5 @@ namespace OpenVinoSharp.Extensions.model
         {
             return data.SelectMany(arr => arr).ToArray();
         }
-
     }
 }

@@ -38,7 +38,6 @@ namespace OpenVinoSharp.Extensions.process
             return image;
         }
 
-
         /// <summary>
         /// Result drawing
         /// </summary>
@@ -88,7 +87,9 @@ namespace OpenVinoSharp.Extensions.process
         /// Key point result drawing
         /// </summary>
         /// <param name="pose">Key point data</param>
-        /// <param name="image">image</param>
+        /// <param name="img">image</param>
+        /// <param name="visual_thresh"></param>
+        /// <param name="with_box"></param>
         public static Mat draw_poses(PoseResult pose, Mat img, float visual_thresh = 0.2f, bool with_box = true)
         {
             Mat image = img.Clone();
@@ -149,6 +150,5 @@ namespace OpenVinoSharp.Extensions.process
             return image;
            
         }
-
     }
 }

@@ -30,9 +30,10 @@ namespace OpenVinoSharp.Extensions
 
                 // Optimize for latency. Most of the devices are configured for latency by default,
                 // but there are exceptions like GNA
-                Dictionary<string, string> latency = new Dictionary<string, string>();
-                latency.Add("PERFORMANCE_HINT", "1");
-
+                Dictionary<string, string> latency = new Dictionary<string, string>
+                {
+                    { "PERFORMANCE_HINT", "1" }
+                };
 
                 // Create ov::Core and use it to compile a model.
                 // Select the device by providing the name as the second parameter to CLI.
@@ -50,7 +51,7 @@ namespace OpenVinoSharp.Extensions
                 infer_request.infer();
                 // Benchmark for seconds_to_run seconds and at least niter iterations
                 int niter = 10;
-                List<double> latencies = new List<double>();
+                List<double> latencies = [];
 
                 TimeSpan seconds_to_run = TimeSpan.FromSeconds(10);
                 DateTime start = DateTime.Now;

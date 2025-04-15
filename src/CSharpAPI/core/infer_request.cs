@@ -182,7 +182,7 @@ namespace OpenVinoSharp
         /// <summary>
         /// Sets an input tensor to infer models with single input.
         /// </summary>
-        /// <exception cref="">If model has several inputs, an exception is thrown.</exception>
+        /// <exception cref="Exception">If model has several inputs, an exception is thrown.</exception>
         /// <param name="tensor">Reference to the input tensor.</param>
         public void set_input_tensor(Tensor tensor)
         {
@@ -206,7 +206,7 @@ namespace OpenVinoSharp
         /// <summary>
         /// Sets an output tensor to infer models with single output.
         /// </summary>
-        /// <exception cref="">If model has several outputs, an exception is thrown.</exception>
+        /// <exception cref="Exception">If model has several outputs, an exception is thrown.</exception>
         /// <param name="tensor">Reference to the output tensor.</param>
         public void set_output_tensor(Tensor tensor)
         {
@@ -234,7 +234,7 @@ namespace OpenVinoSharp
         /// <summary>
         /// Gets an input/output tensor for inference by node.
         /// </summary>
-        /// <exception cref="">If the tensor with the specified @n node is not found, an exception is thrown.</exception>
+        /// <exception cref="Exception">If the tensor with the specified @n node is not found, an exception is thrown.</exception>
         /// <param name="node">Node of the tensor to get.</param>
         /// <returns>Tensor for the node @n node.</returns>
         public Tensor get_tensor(Node node)
@@ -262,7 +262,7 @@ namespace OpenVinoSharp
         /// <summary>
         /// Gets an input/output tensor for inference.
         /// </summary>
-        /// <exception cref="">If the tensor with the specified @p port is not found, an exception is thrown.</exception>
+        /// <exception cref="Exception">If the tensor with the specified @p port is not found, an exception is thrown.</exception>
         /// <param name="port">Port of the tensor to get.</param>
         /// <returns>Tensor for the port @p port.</returns>
         public Tensor get_tensor(Output port)
@@ -285,7 +285,7 @@ namespace OpenVinoSharp
         /// <summary>
         /// Gets an input/output tensor for inference.
         /// </summary>
-        /// <exception cref="">If the tensor with the specified @p port is not found, an exception is thrown.</exception>
+        /// <exception cref="Exception">If the tensor with the specified @p port is not found, an exception is thrown.</exception>
         /// <param name="port">Port of the tensor to get.</param>
         /// <returns>Tensor for the port @p port.</returns>
         public Tensor get_tensor(Input port)
@@ -440,7 +440,7 @@ namespace OpenVinoSharp
             profiling_info_list = (ov_profiling_info_list)tempp;
             l = Marshal.SizeOf(typeof(Ov.ProfilingInfo));
 
-            List<Ov.ProfilingInfo> profiling_infos = new List<ProfilingInfo>();
+            List<Ov.ProfilingInfo> profiling_infos = [];
             for (int i = 0; i < (int)profiling_info_list.size; ++i) 
             {
                 var tempt = Marshal.PtrToStructure(profiling_info_list.profiling_infos, typeof(Ov.ProfilingInfo));

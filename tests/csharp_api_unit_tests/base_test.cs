@@ -16,10 +16,10 @@ namespace OpenVinoSharp.Tests
             public string output_name = "output0";
 
             public OvType input_type = new OvType(ElementType.F32);
-            public Shape input_shape = new Shape(new long[] { 1, 3, 640, 640 });
+            public Shape input_shape = [.. new long[] { 1, 3, 640, 640 }];
 
             public OvType output_type = new OvType(ElementType.F16);
-            public Shape output_shape = new Shape(new long[] { 1, 84, 8400 });
+            public Shape output_shape = [.. new long[] { 1, 84, 8400 }];
         }
         TestModelInfo model_info = new TestModelInfo();
 
@@ -79,7 +79,6 @@ namespace OpenVinoSharp.Tests
             FileStream fs = new FileStream(get_model_bin_file_name(), FileMode.Open, FileAccess.Read);
 
             long len = fs.Seek(0, SeekOrigin.End);
-
 
             fs.Seek(0, SeekOrigin.Begin);
 

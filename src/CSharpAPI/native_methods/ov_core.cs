@@ -249,12 +249,15 @@ namespace OpenVinoSharp
             IntPtr varg3, IntPtr varg4,
             IntPtr varg5, IntPtr varg6);
 
-
         /// <summary>
         /// Sets properties for a device, acceptable keys can be found in ov_property_key_xxx.
         /// </summary>
         /// <param name="core">A pointer to the ie_core_t instance.</param>
         /// <param name="device_name">Name of a device.</param>
+        /// <param name="varg1"></param>
+        /// <param name="varg2"></param>
+        /// <param name="varg3"></param>
+        /// <param name="varg4"></param>
         /// <returns>Status code of the operation: OK(0) for success.</returns>
         [DllImport(dll_extern, EntryPoint = "ov_core_set_property",
             CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
@@ -324,7 +327,6 @@ namespace OpenVinoSharp
             ref sbyte device_name,
             ref IntPtr compiled_model);
 
-
         /// <summary>
         /// Returns device plugins version information.
         /// Device name can be complex and identify multiple devices at once like `HETERO:CPU,GPU`;
@@ -340,7 +342,6 @@ namespace OpenVinoSharp
             IntPtr core, 
             ref sbyte device_name,
             IntPtr versions);
-
 
         /// <summary>
         /// Releases memory occupied by ov_core_version_list_t.
@@ -367,7 +368,6 @@ namespace OpenVinoSharp
             ref sbyte device_name,
             ulong context_args_size,
             ref IntPtr context);
-
 
         /// <summary>
         /// Creates a compiled model from a source model within a specified remote context.
@@ -399,5 +399,4 @@ namespace OpenVinoSharp
         public extern static ExceptionStatus ov_core_get_default_context(IntPtr core, ref sbyte device_name, ref IntPtr context);
 
     }
-
 }

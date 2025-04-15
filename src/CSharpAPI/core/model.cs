@@ -284,8 +284,6 @@ namespace OpenVinoSharp
             return new Input(node, 0);
         }
 
-
-
         /// <summary>
         /// Get single input of model, which only support single input model.
         /// </summary>
@@ -375,7 +373,7 @@ namespace OpenVinoSharp
         public List<Input> inputs() 
         {
             ulong input_size = get_inputs_size();
-            List<Input> inputs = new List<Input>();
+            List<Input> inputs = [];
             for (ulong index = 0; index < input_size; ++index) 
             {
                 inputs.Add(input(index));
@@ -389,7 +387,7 @@ namespace OpenVinoSharp
         public List<Output> outputs()
         {
             ulong output_size = get_outputs_size();
-            List<Output> outputs = new List<Output>();
+            List<Output> outputs = [];
             for (ulong index = 0; index < output_size; ++index)
             {
                 outputs.Add(output(index));
@@ -404,7 +402,7 @@ namespace OpenVinoSharp
         public List<Input> const_inputs()
         {
             ulong input_size = get_inputs_size();
-            List<Input> inputs = new List<Input>();
+            List<Input> inputs = [];
             for (ulong index = 0; index < input_size; ++index)
             {
                 inputs.Add(const_input(index));
@@ -419,7 +417,7 @@ namespace OpenVinoSharp
         public List<Output> const_outputs()
         {
             ulong output_size = get_outputs_size();
-            List<Output> outputs = new List<Output>();
+            List<Output> outputs = [];
             for (ulong index = 0; index < output_size; ++index)
             {
                 outputs.Add(const_output(index));
@@ -434,7 +432,6 @@ namespace OpenVinoSharp
         {
             return NativeMethods.ov_model_is_dynamic(m_ptr);
         }
-
 
         /// <summary>
         /// Do reshape in model with partial shape for a specified name.
@@ -493,10 +490,6 @@ namespace OpenVinoSharp
             HandleException.handler(NativeMethods.ov_model_reshape_by_ports(m_ptr, ref nodes_ptr[0],
                 ref shapes[0], (ulong)partial_shapes.Count));
         }
-
     }
-
-    
 }
-
 

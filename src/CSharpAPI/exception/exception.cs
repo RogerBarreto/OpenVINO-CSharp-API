@@ -19,27 +19,21 @@ namespace OpenVinoSharp
         /// </summary>
         public ExceptionStatus status { get; set; }
 
-
         /// <summary>
         /// A description of the error
         /// </summary>
         public string err_msg { get; set; }
 
-
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="status">The numeric code for error status</param>
-        /// <param name="func_name">The source file name where error is encountered</param>
         /// <param name="err_msg">A description of the error</param>
-        /// <param name="file_name">The source file name where error is encountered</param>
-        /// <param name="line">The line number in the source where error is encountered</param>
         public OVException(ExceptionStatus status, string err_msg)
             : base(err_msg)
         {
             this.status = status;
             this.err_msg = err_msg;
         }
-
     }
 }

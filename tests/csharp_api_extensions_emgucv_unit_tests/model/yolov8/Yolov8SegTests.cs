@@ -46,8 +46,7 @@ namespace OpenVinoSharp.Extensions.model.Tests
         {
             Yolov8Seg yolo = new Yolov8Seg(model_xml_path);
             Mat image = CvInvoke.Imread(image_path1);
-            List<Mat> images = new List<Mat>();
-            images.Add(image);
+            List<Mat> images = [image];
             List<SegResult> result = yolo.predict(images);
             //CvInvoke.Imshow("aa", result.datas[0].mask);
             //CvInvoke.Imshow("bb", result.datas[1].mask);

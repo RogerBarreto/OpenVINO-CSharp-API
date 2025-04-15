@@ -78,7 +78,6 @@ namespace OpenVinoSharp.Extensions.model
         }
     }
 
-
     public class Yolov8PoseConfig : Config
     {
         public string device = "CPU";
